@@ -1,0 +1,189 @@
+////////////////////////////////////////////////////////////////////////////////////
+#include <stdio.h>
+#include <conio.h>
+struct node
+{
+    int data;
+ struct node *next;
+};
+
+struct node *head,*trav , *newnode,*trav1,*current,*prev;
+
+void insert_front();
+void insert_last();
+void insert_anyposition();
+void delete_anyposition();
+void reverse_list();
+void main()
+{
+ head = (struct node *) malloc(sizeof(struct node));
+  clrscr();
+  head = NULL;
+  insert_front();
+  insert_front();
+  insert_front();
+  insert_last();
+  insert_anyposition();
+//  delete_anyposition();
+reverse_list();
+  trav=head;
+   while(trav !=NULL)
+    {
+      printf("%d-->" ,trav->data);
+      trav = trav->next;
+    }
+ getch();
+
+}
+
+/////////////////////////////////////start/////////////////////////////////////////
+
+void insert_front()
+{
+ int data_value;
+    printf("\nEnter data of the node: ");
+    scanf("\n%d", &data_value);
+    newnode = (struct node *) malloc(sizeof(struct node));;
+    newnode->data=data_value;
+    newnode->next=head;
+    head=newnode;
+    printf("%d\n",&newnode->next);
+}
+//////////////////////////////////////END/////////////////////////////////////////
+
+
+//////////////////////Function to enter last at the linked list/////////////////////////////////////////////////////
+void insert_last()
+{
+    int data_value;
+    trav = head;
+    printf("\nEnter data of the node: ");
+    scanf("%d", &data_value);
+    newnode = (struct node *) malloc(sizeof(struct node));
+    newnode->data=data_value;
+    if(head->next == NULL)
+    {
+	head->next = newnode;
+    }
+     else
+    {
+	while (trav->next != NULL)
+	{
+	   trav = trav->next;
+	}
+	trav->next = newnode;
+    }
+       printf("%d\n",&newnode->next);
+
+}
+////////////////////////////////////END/////////////////////////////////////////////////
+
+
+////////////////////////////\function to insert at any position in lik list/////////////////////////////////
+void insert_anyposition()
+{
+    int position;
+    int data_value;
+    int i;
+    printf("enter position to enter new node");
+    scanf("%d", &position);
+    printf("\nEnter data of the node: ");
+    scanf("%d", &data_value);
+    newnode = (struct node *) malloc(sizeof(struct node));
+    newnode->data=data_value;
+    trav=head;
+    for (i=1;i<position-1;i++)
+    {
+	trav=trav->next;
+    }
+    newnode->next=trav->next;
+    trav->next=newnode;
+     printf("%d\n",&newnode->next);
+}
+
+////////////////////////////function for delete first node///////////////////////////////
+void delete_front()
+{
+    trav=head;
+    head=trav->next;
+    free(trav);
+}
+
+
+
+
+//////////////////////////function for delete at last node////////////////////////
+void delete_last()
+{
+    trav=head;
+    if(trav->next == NULL)
+    {
+	printf("empty link list");
+    }
+    else
+    {
+	while(trav->next!=NULL)
+	{
+	    trav1=trav;
+	    trav=trav->next;
+	}
+	trav1->next=NULL;
+	free(trav);
+    }
+}
+
+/////////////////////////////////function to delete at any position/////////////////////////////
+void delete_anyposition()
+{
+    int position;
+    int i;
+    printf("enter any postion to delete node");
+    scanf("%d",position);
+//    printf("20");
+    trav=head;
+    printf("%u\n",trav);
+    trav1=trav;
+       printf("%u\n",trav1);
+    for (i=1;i=position;i++)
+    {
+
+      trav=trav->next;
+	printf("%u\n",trav);
+    }
+
+   // printf("%d\n",trav->data);
+   //  printf("%d\n",trav->data);
+
+  //  for (i=1;i<position-1;i++)
+//    {
+
+       ///	trav1=trav1->next;
+     //	  printf("%u\n",trav1);
+   // }
+
+   // printf("%d\n",trav->next);
+   //  printf("%d\n",trav1->next);
+
+  //  free(trav);
+    // trav1->next=trav->next;
+     free(trav);
+}
+
+
+//////////////////////////function to reverse link list////////////////
+void reverse_list()
+{
+prev=head;
+current=head->next;
+head=head->next;
+prev->next=NULL;
+while(head !=NULL)
+{
+head=head->next;
+current->next=prev;
+prev=current;
+current=head;
+}
+printf("1");
+head=prev;
+}
